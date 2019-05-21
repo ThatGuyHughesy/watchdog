@@ -59,3 +59,11 @@ typings/
 
 # next.js build output
 .next
+
+# os x
+.DS_STORE
+
+# watchdog
+capture.jpg
+detection.jpg
+test.jpg
