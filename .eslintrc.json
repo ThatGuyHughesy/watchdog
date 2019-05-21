@@ -1,0 +1,8 @@
+{
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "no-console": 0,
+    "no-multiple-empty-lines": ["error", { "max": 1 }]
+  }
+}

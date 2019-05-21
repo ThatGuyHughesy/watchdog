@@ -1,0 +1,40 @@
+{
+  "name": "watchdog",
+  "description": "Get WhatsApp alerts whenever someone approaches your unattended laptop",
+  "version": "0.1.0-SNAPSHOT",
+  "author": "Conor Hughes <hello@conorhughes.me>",
+  "copyright": "© 2019, Snugsend",
+  "homepage": "https://github.com/ThatGuyHughesy/watchdog",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThatGuyHughesy/watchdog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ThatGuyHughesy/watchdog/issues"
+  },
+  "keywords": [
+    "nodejs",
+    "webcam",
+    "image-recognition",
+    "twilio",
+    "whatsapp"
+  ],
+  "main": "main.js",
+  "scripts": {
+    "start": "NODE_ENV=development node main.js",
+    "lint": "eslint --fix . --ext .js .",
+    "test": "NODE_ENV=test mocha ./*.spec.js --timeout 10000 --exit"
+  },
+  "dependencies": {
+    "node-webcam": "^0.5.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "mocha": "^6.1.4",
+    "prettier": "^1.17.1"
+  }
+}
