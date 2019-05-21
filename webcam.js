@@ -1,6 +1,6 @@
 const NodeWebcam = require("node-webcam");
 
-const opts = {
+const defaultOpts = {
   width: 1280,
   height: 720,
   quality: 100,
@@ -12,10 +12,14 @@ const opts = {
   verbose: false
 };
 
-const Webcam = NodeWebcam.create(opts);
-
-function capture(filename, callback) {
-  Webcam.capture(filename, callback);
+function createWebcam(opts) {
+  return NodeWebcam.create(opts);
 }
 
-module.exports.capture = capture;
+function captureImage(webcam, filename, callback) {
+  webcam.capture(filename, callback);
+}
+
+module.exports.defaultOpts = defaultOpts;
+module.exports.createWebcam = createWebcam;
+module.exports.captureImage = captureImage;
