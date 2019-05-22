@@ -67,3 +67,6 @@ typings/
 capture.jpg
 detection.jpg
 test.jpg
+
+# api keys
+.env
