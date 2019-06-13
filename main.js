@@ -1,27 +1,51 @@
 require("dotenv").config();
 
-const { defaultOpts, createWebcam, captureImage } = require("./webcam");
-const { loadImage, saveImage, detectFaces, drawDetection } = require("./face");
-const { createClient, sendAlert } = require("./twilio");
+const express = require("express");
+const bodyParser = require("body-parser");
+const ngrok = require("ngrok");
+const { MessagingResponse } = require("twilio").twiml;
+const { CronJob } = require("cron");
 
-const webcam = createWebcam(defaultOpts);
-const twilioClient = createClient(
-  process.env.ACCOUNT_SID,
-  process.env.AUTH_TOKEN
-);
+const { detect } = require("./detect");
 
-captureImage(webcam, "capture", async (err, path) => {
-  const image = await loadImage(path);
-  const detections = await detectFaces(image);
+const app = express();
+const twiml = new MessagingResponse();
 
-  if (detections.length > 0) {
-    sendAlert(twilioClient, {
-      from: `whatsapp:+${process.env.WHATSAPP_FROM}`,
-      to: `whatsapp:+${process.env.WHATSAPP_TO}`,
-      body: "There's someone at your laptop!"
-    });
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(`${__dirname}/images`));
 
-    const detection = await drawDetection(image, detections);
-    saveImage("detection.jpg", detection.toBuffer("image/jpeg"));
+const detectionJob = new CronJob("*/30 * * * * *", () => {
+  detect();
+});
+
+app.post("/incoming", (req, res) => {
+  switch (req.body.Body.toLowerCase()) {
+    case "start":
+      detectionJob.start();
+      twiml.message("Watchdog is keeping your laptop safe!");
+      break;
+    case "pause":
+      detectionJob.stop();
+      twiml.message("Watchdog is no longer keeping your laptop safe!");
+      break;
+    default:
+      twiml.message("This command is invalid.");
   }
+
+  res.writeHead(200, { "Content-Type": "text/xml" });
+  res.end(twiml.toString());
+});
+
+app.post("/status");
+
+app.listen(process.env.SERVER_PORT);
+
+ngrok.connect({
+  proto: "http",
+  inspect: false,
+  addr: process.env.SERVER_PORT,
+  subdomain: process.env.NGROK_SUBDOMAIN,
+  authtoken: process.env.NGROK_AUTH_TOKEN,
+  region: process.env.NGROK_REGION,
+  auth: `${process.env.NGROK_USERNAME}:${process.env.NGROK_PASSWORD}`
 });

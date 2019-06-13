@@ -22,8 +22,8 @@ async function loadImage(filename) {
   return image;
 }
 
-function saveImage(filename, buf) {
-  fs.writeFileSync(filename, buf);
+async function saveImage(filename, buf) {
+  return fs.writeFileSync(filename, buf);
 }
 
 async function detectFaces(image) {
