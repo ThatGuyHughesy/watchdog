@@ -1,11 +1,11 @@
-const fs = require("fs");
-const { describe, it } = require("mocha");
-const { assert } = require("chai");
+const fs = require('fs');
+const { describe, it } = require('mocha');
+const { assert } = require('chai');
 
-const { defaultOpts, createWebcam, captureImage } = require("./webcam");
+const { defaultOpts, createWebcam, captureImage } = require('./webcam');
 
 const workingWebcam = createWebcam(defaultOpts);
-const brokenWebcam = createWebcam({ device: "broken" });
+const brokenWebcam = createWebcam({ device: 'broken' });
 
 const removeWebcamCapture = path => {
   try {
@@ -24,17 +24,17 @@ const webcamCaptureExists = path => {
   }
 };
 
-describe("Webcam", () => {
-  it("Captured", () => {
-    captureImage(workingWebcam, "test", (err, path) => {
-      assert.typeOf(err, "null");
+describe('Webcam', () => {
+  it('Captured', () => {
+    captureImage(workingWebcam, 'test', (err, path) => {
+      assert.typeOf(err, 'null');
       assert.ok(webcamCaptureExists(path));
       removeWebcamCapture(path);
     });
   });
 
-  it("Not Captured", () => {
-    captureImage(brokenWebcam, "test", err => {
+  it('Not Captured', () => {
+    captureImage(brokenWebcam, 'test', err => {
       assert.equal(err instanceof Error, true);
     });
   });

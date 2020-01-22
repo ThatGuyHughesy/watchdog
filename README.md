@@ -2,6 +2,16 @@
 
 Get WhatsApp alerts whenever someone approaches your unattended laptop.
 
+[![Build Status](https://travis-ci.org/ThatGuyHughesy/watchdog.svg?branch=master)](https://travis-ci.org/ThatGuyHughesy/watchdog)
+
+## Demo
+
+Once you have Watchdog running, send `start` in your Twilio WhatsApp Sandbox to begin the detection.
+
+As soon as Watchdog detects someone at your laptop you'll recieve an alert with an image of the culprit!
+
+<img src="resources/demo.png" width="300">
+
 ## Prerequisites
 
 Linux
@@ -43,17 +53,17 @@ SERVER_PORT=<SERVER_PORT_GOES_HERE>
 Example `.env`
 
 ```bash
-TWILIO_ACCOUNT_SID="44370743a981sdf18074ee2d7c87"
-TWILIO_AUTH_TOKEN="f32dcbf09af4190caab20f3ecc0312"
-TWILIO_WHATSAPP_FROM="1410000001"
-TWILIO_WHATSAPP_TO="353870000001"
-NGROK_AUTH_TOKEN="84shw61df31ud6s_kd73gr9hhd613"
-NGROK_SUBDOMAIN="watchdog"
-NGROK_URL="https://watchdog:watchdog@watchwatchdog.ngrok.io"
-NGROK_REGION="us"
-NGROK_USERNAME="watchdog"
-NGROK_PASSWORD="watchdog"
-SERVER_PORT="5000"
+TWILIO_ACCOUNT_SID=44370743a981sdf18074ee2d7c87
+TWILIO_AUTH_TOKEN=f32dcbf09af4190caab20f3ecc0312
+TWILIO_WHATSAPP_FROM=1410000001
+TWILIO_WHATSAPP_TO=353870000001
+NGROK_AUTH_TOKEN=84shw61df31ud6s_kd73gr9hhd613
+NGROK_SUBDOMAIN=watchdog
+NGROK_URL=https://watchdog:watchdog@watchwatchdog.ngrok.io
+NGROK_REGION=us
+NGROK_USERNAME=watchdog
+NGROK_PASSWORD=watchdog
+SERVER_PORT=5000
 ```
 
 Run:

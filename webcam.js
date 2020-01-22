@@ -1,4 +1,4 @@
-const NodeWebcam = require("node-webcam");
+const NodeWebcam = require('node-webcam');
 
 const defaultOpts = {
   width: 1280,
@@ -6,9 +6,9 @@ const defaultOpts = {
   quality: 100,
   delay: 0,
   saveShots: true,
-  output: "jpeg",
+  output: 'jpeg',
   device: false,
-  callbackReturn: "location",
+  callbackReturn: 'location',
   verbose: false
 };
 
