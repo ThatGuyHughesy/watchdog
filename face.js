@@ -1,8 +1,8 @@
-require("@tensorflow/tfjs-node");
+require('@tensorflow/tfjs-node');
 
-const canvas = require("canvas");
-const fs = require("fs");
-const faceapi = require("face-api.js");
+const canvas = require('canvas');
+const fs = require('fs');
+const faceapi = require('face-api.js');
 
 const { Canvas, Image, ImageData } = canvas;
 
@@ -27,11 +27,11 @@ async function saveImage(filename, buf) {
 }
 
 async function detectFaces(image) {
-  await faceDetectionNet.loadFromDisk("weights").catch(err => {
+  await faceDetectionNet.loadFromDisk('weights').catch(err => {
     console.error(`Error loading SsdMobilenetv1Options weights: \n${err}`);
   });
 
-  await faceapi.nets.faceLandmark68Net.loadFromDisk("weights").catch(err => {
+  await faceapi.nets.faceLandmark68Net.loadFromDisk('weights').catch(err => {
     console.error(`Error loading faceLandmark68Net weights: \n${err}`);
   });
 
